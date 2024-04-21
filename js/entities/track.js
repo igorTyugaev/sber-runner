@@ -29,16 +29,12 @@ export class Track {
      * Создает элемент DOM для грузовика.
      */
     createTrack() {
-        this.element = document.createElement('img');
-        this.element.src = "/public/track.png";
-        this.element.classList.add('track');
     }
 
     /**
      * Увеличивает позицию грузовика по оси Y
      */
     incrementPosY() {
-        this.posY = this._posY + this.speed;
     }
 
     /**
@@ -46,7 +42,6 @@ export class Track {
      * @returns {number} Позиция по оси X.
      */
     get posX() {
-        return this._posX;
     }
 
     /**
@@ -54,7 +49,6 @@ export class Track {
      * @returns {number} Позиция по оси Y.
      */
     get posY() {
-        return this._posY;
     }
 
     /**
@@ -63,20 +57,12 @@ export class Track {
      * @param {number} posY - Новая позиция по оси Y.
      */
     set posY(posY) {
-        this._posY = posY;
-
-        if (posY < window.innerHeight + this.height) {
-            this._posY = posY;
-        } else {
-            this._posY = getRandomPosY();
-        }
+        const offsideHeight = window.innerHeight + this.height;
     }
 
     /**
      * Отрисовывает грузовик на экране, обновляя его позицию.
      */
     render() {
-        this.element.style.transform = `translate(${this.posX * 10}vw, calc(-100% + ${this.posY}px))`;
-        this.incrementPosY();
     }
 }
