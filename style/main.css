@@ -1,0 +1,70 @@
+/*.game - основной контейнер игры, занимающий всю ширину и высоту экрана.*/
+.game {
+    width: 100vw; /* Ширина игрового поля */
+    height: 100vh; /* Высота игрового поля */
+
+    --square-size: 180px; /* Размер квадрата */
+    --road-width: 40vw; /* Ширина дороги */
+
+    background-image: url("/public/road.jpg"), url("/public/green.jpg");
+    background-size: var(--road-width) var(--square-size), var(--square-size) var(--square-size);
+    background-repeat: repeat-y, repeat;
+    background-position: center 0, 0 0;
+
+    overflow: hidden;
+
+    animation: scroll 2s linear infinite;
+    position: relative;
+}
+
+.cat {
+    position: absolute;
+    object-fit: contain;
+    width: 7vw;
+    left: 31.5vw;
+    bottom: 15vh;
+    z-index: 5;
+}
+
+.track {
+    position: absolute;
+    top: 0;
+    left: calc((100vw - var(--road-width)) / 2);
+    width: calc(var(--road-width) / 4);
+
+    transform: translateY(-100%);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.9);
+
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 24px;
+
+    display: none;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.modal.active {
+    display: inline-flex;
+}
+
+/*В анимации @keyframes scroll определен только один ключевой кадр (100%),
+ который изменяет позицию фона. Это достигается путем изменения свойства
+ background-position от "center 0" до "center var(--square-size)",
+ что создает иллюзию движения фона вверх.*/
+@keyframes scroll {
+    100% {
+        background-position: center var(--square-size), 0 var(--square-size);
+    }
+}
