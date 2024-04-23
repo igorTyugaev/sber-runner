@@ -13,6 +13,6 @@
  что создает иллюзию движения фона вверх.*/
 @keyframes scroll {
     100% {
-        background-position: center 0 var(--square-size);
+        background-position: 0 var(--square-size);
     }
 }
