@@ -6,13 +6,11 @@ import "../style/main.css"
 import {Cat, Track} from "./entities";
 import {GameLoop, checkCollision, getRandomPosY} from "./common";
 
-// Получение элементов игры из DOM
-const gameEl = document.querySelector('.game');
-
 // Создание экземпляра кота
 const cat = new Cat();
 // Создание экземпляра игрового цикла
 const gameLoop = new GameLoop()
+
 // Массив для хранения дорог
 const tracks = [];
 
@@ -25,17 +23,26 @@ function startGame() {
 
 /**
  * Функция для перезапуска игры.
- * Сбрасывает позицию кота и случайно перемещает грузовики.
+ * Сбрасывает позицию кота и случайно перемещает дороги.
  */
 function restartGame() {
 }
 
 /**
  * Функция для отрисовки игры.
- * Отрисовывает каждый грузовик и кота, проверяет столкновения.
+ * Отрисовывает каждую дорогу и кота, проверяет столкновения.
  */
 function render() {
-    // TODO: Используй checkCollision(track, cat) для проверки столкновений
+    tracks.forEach((track) => {
+        track.render();
+
+        if (checkCollision(track, cat)) {
+            restartGame();
+            alert('Game Over!')
+        }
+    })
+
+    cat.render()
 }
 
 // Запуск игры
